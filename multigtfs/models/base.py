@@ -13,11 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import unicode_literals
+
 from codecs import BOM_UTF8
 from collections import defaultdict
 from csv import reader, writer
 from datetime import datetime, date
 from logging import getLogger
+from multigtfs.compat import get_blank_value
 import re
 
 from django.contrib.gis.db import models
@@ -25,7 +27,6 @@ from django.contrib.gis.db.models.query import GeoQuerySet
 from django.db.models.fields.related import ManyToManyField
 from django.utils.six import StringIO, text_type, PY3
 
-from multigtfs.compat import get_blank_value
 
 logger = getLogger(__name__)
 re_point = re.compile(r'(?P<name>point)\[(?P<index>\d)\]')
@@ -34,6 +35,7 @@ large_queryset_size = 100000
 
 
 class BaseQuerySet(GeoQuerySet):
+
     def populated_column_map(self):
         '''Return the _column_map without unused optional fields'''
         column_map = []
@@ -62,7 +64,8 @@ class BaseQuerySet(GeoQuerySet):
         return column_map
 
 
-class BaseManager(models.GeoManager):
+class BaseManager(models.Manager):
+
     def get_queryset(self):
         '''Django 1.8 expects this method name. Simply calling the other
         method results in a recursion error in some python interpretters.
@@ -71,6 +74,9 @@ class BaseManager(models.GeoManager):
 
     def get_query_set(self):
         return BaseQuerySet(self.model)
+
+#     def get(self):
+#         return BaseQuerySet(self.model)
 
     def in_feed(self, feed):
         '''Return the objects in the target feed'''

@@ -66,10 +66,21 @@ WSGI_APPLICATION = 'exploreproj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'explore_db',
+        'USER': 'vpistis',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -85,14 +96,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
 
-SOUTH_MIGRATION_MODULES = {
-    'multigtfs': 'multigtfs.south_migrations'
-}
+#SOUTH_MIGRATION_MODULES = {
+#    'multigtfs': 'multigtfs.south_migrations'
+#}
 
 # Extend with developer's prefered settings
-try:
-    from exploreproj.local_settings import *  # flake8: noqa
-except ImportError:
-    pass
-else:
-    INSTALLED_APPS.extend(LOCAL_INSTALLED_APPS)
+# try:
+#     from exploreproj.local_settings import *  # flake8: noqa
+# except ImportError:
+#     pass
+# else:
+#     INSTALLED_APPS.extend(LOCAL_INSTALLED_APPS)
