@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.0.0-gs (2017-03-13)
+------------------
+This is a GreenShare version (www.greenshare.it)
+
+* Deleted South migrations
+* add delete_feed command
+* support for Dajngo 1.10 and Python 3
+
+
 1.0.0 (2016-03-29)
 ------------------
 * The project has been production-ready for a while. Updating the version

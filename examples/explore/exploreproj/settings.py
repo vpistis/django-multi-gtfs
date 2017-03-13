@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -37,13 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'exploreapp',
 ]
-try:
-    import south
-except ImportError:
-    pass
-else:
-    assert south
-    INSTALLED_APPS.append('south')
 
 INSTALLED_APPS.extend([
     'multigtfs',
@@ -63,7 +56,6 @@ ROOT_URLCONF = 'exploreproj.urls'
 
 WSGI_APPLICATION = 'exploreproj.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 # DATABASES = {
@@ -77,8 +69,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'explore_db',
-        'USER': 'vpistis',
-        'PASSWORD': '',
+        'USER': 'user',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -95,10 +87,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
-
-#SOUTH_MIGRATION_MODULES = {
-#    'multigtfs': 'multigtfs.south_migrations'
-#}
 
 # Extend with developer's prefered settings
 # try:

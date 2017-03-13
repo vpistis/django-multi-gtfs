@@ -1,8 +1,5 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic import DetailView, ListView
-from multigtfs.models import (
-    Agency, Block, Fare, FareRule, Feed, FeedInfo, Route, Service, ServiceDate,
-    Shape, ShapePoint, Stop, StopTime, Trip, Zone)
 
 from exploreapp.views import (
     ByFeedListView, FareRuleByFareListView, FareRuleByRouteListView,
@@ -10,10 +7,11 @@ from exploreapp.views import (
     ShapePointByShapeListView, StopTimeByStopListView, StopTimeByTripListView,
     TripByBlockListView, TripByRouteListView, TripByServiceListView,
     TripByShapeListView)
+from multigtfs.models import (
+    Agency, Block, Fare, FareRule, Feed, FeedInfo, Route, Service, ServiceDate,
+    Shape, ShapePoint, Stop, StopTime, Trip, Zone)
 
-
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'feed/$', ListView.as_view(model=Feed), name='feed_list'),
     url(r'feed/(?P<pk>\d+)/$', DetailView.as_view(model=Feed),
         name='feed_detail'),
@@ -95,4 +93,4 @@ urlpatterns = patterns(
         DetailView.as_view(model=Block), name='block_detail'),
     url(r'feed/(?P<feed_id>\d+)/block/(?P<block_id>\d+)/trip/$',
         TripByBlockListView.as_view(), name='trip_by_block_list'),
-)
+]

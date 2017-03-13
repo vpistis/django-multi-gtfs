@@ -15,10 +15,11 @@
 # limitations under the License.
 from __future__ import unicode_literals
 
-from setuptools import setup, find_packages
-from setuptools.command.test import test
 import sys
-# Get the version from __init__.py
+
+from setuptools import find_packages, setup
+from setuptools.command.test import test
+
 from multigtfs import __version__
 
 
@@ -43,36 +44,35 @@ else:
     # In Py2, package data is dict w/ binary string
     package_data = {b'multigtfs': ['tests/fixtures/*.zip']}
 
-
 setup(
-    name='multigtfs',
-    version=__version__,
-    description='General Transit Feed Specification (GTFS) as a Django app',
-    author='John Whitlock',
-    author_email='John-Whitlock@ieee.org',
-    license='Apache License 2.0',
-    url='https://github.com/tulsawebdevs/django-multi-gtfs',
-    packages=find_packages(),
-    install_requires=['Django>=1.8', 'jsonfield>=0.9.20'],
-    keywords='django gtfs',
-    test_suite="run_tests",  # Ignored, but makes pyroma happy
-    cmdclass={'test': my_test},
-    zip_safe=True,
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Environment :: Web Environment",
-        "Framework :: Django",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: Apache Software License",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-    ],
-    include_package_data=True,
-    package_data=package_data,
-    long_description=read('README.rst')
+        name='multigtfs',
+        version=__version__,
+        description='General Transit Feed Specification (GTFS) as a Django app',
+        author='John Whitlock',
+        author_email='John-Whitlock@ieee.org',
+        license='Apache License 2.0',
+        url='https://github.com/tulsawebdevs/django-multi-gtfs',
+        packages=find_packages(),
+        install_requires=['Django>=1.8', 'jsonfield>=0.9.20'],
+        keywords='django gtfs',
+        test_suite="run_tests",  # Ignored, but makes pyroma happy
+        cmdclass={'test': my_test},
+        zip_safe=True,
+        classifiers=[
+            "Development Status :: 5 - Production/Stable",
+            "Environment :: Web Environment",
+            "Framework :: Django",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: Apache Software License",
+            "Operating System :: OS Independent",
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 2",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.4",
+            "Topic :: Software Development :: Libraries :: Python Modules",
+        ],
+        include_package_data=True,
+        package_data=package_data,
+        long_description=read('README.rst')
 )
