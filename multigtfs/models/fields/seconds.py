@@ -107,6 +107,7 @@ class SecondsField(FieldBase):
         colons = svalue.count(':')
         if colons == 2:
             hours, minutes, seconds = [int(v) for v in svalue.split(':')]
+            seconds = 0 # HACK FOR GOOGLE DIRECTIONS TIME PRECISION ?             
         elif colons == 1:
             hours, minutes = [int(v) for v in svalue.split(':')]
             seconds = 0

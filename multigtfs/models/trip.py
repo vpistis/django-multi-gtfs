@@ -70,14 +70,21 @@ class Trip(Base):
 
     def update_geometry(self, update_parent=True):
         """Update the geometry from the Shape or Stops"""
+        print(" update_geometry trip {}".format(self.id))   
+       
         original = self.geometry
         if self.shape:
             self.geometry = self.shape.geometry
         else:
-            stoptimes = self.stoptime_set.order_by('stop_sequence')
-            if stoptimes.count() > 1:
-                self.geometry = LineString(
-                    [st.stop.point.coords for st in stoptimes])
+            try:
+                stoptimes = self.stoptime_set.order_by('stop_sequence')
+                if stoptimes.count() > 1:
+                    self.geometry = LineString(
+                        [st.stop.point.coords for st in stoptimes])
+            except Exception as e:
+                print(str(e))
+                print("  == errore update_geometry trip {}".format(self.id))   
+                 
         if self.geometry != original:
             self.save()
             if update_parent:

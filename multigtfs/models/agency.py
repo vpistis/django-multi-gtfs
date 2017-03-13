@@ -50,7 +50,7 @@ class Agency(Base):
     extra_data = JSONField(default={}, blank=True, null=True)
 
     def __str__(self):
-        return u"%d-%s" % (self.feed.id, self.agency_id)
+        return u"%d-%s" % (self.feed.id, self.name)
 
     class Meta:
         db_table = 'agency'

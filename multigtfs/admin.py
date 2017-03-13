@@ -24,9 +24,13 @@ from multigtfs.models import (
 geo_admin = admin.OSMGeoAdmin if MULTIGTFS_OSMADMIN else admin.GeoModelAdmin
 
 
+
+
 class AgencyAdmin(admin.ModelAdmin):
     raw_id_fields = ('feed', )
-
+    list_display = ("id",  "name","url")
+    search_fields = ['name']
+    
 
 class BlockAdmin(admin.ModelAdmin):
     raw_id_fields = ('feed', )
@@ -50,19 +54,22 @@ class FrequencyAdmin(admin.ModelAdmin):
 
 class RouteAdmin(geo_admin):
     raw_id_fields = ('feed', 'agency')
-
+    list_display = ("route_id",  "agency","short_name","long_name")
+    search_fields = ["route_id",  "agency__name","short_name","long_name"]
 
 class ServiceAdmin(admin.ModelAdmin):
     raw_id_fields = ('feed', )
-
+    list_display = ("id", "feed",  "start_date","end_date")
+    search_fields = ["feed__name",  "start_date","end_date"]
 
 class ServiceDateAdmin(admin.ModelAdmin):
     raw_id_fields = ('service', )
-
+    list_display = ("id", "service",  "date","exception_type")
 
 class ShapeAdmin(geo_admin):
     raw_id_fields = ('feed', )
-
+    list_display = ("id","shape_id", "feed", )
+    search_fields = ["id","shape_id", "feed__name",]
 
 class ShapePointAdmin(geo_admin):
     raw_id_fields = ('shape', )
@@ -70,10 +77,16 @@ class ShapePointAdmin(geo_admin):
 
 class StopAdmin(geo_admin):
     raw_id_fields = ('feed', 'zone', 'parent_station')
-
+    list_display = ("id","feed", "stop_id","code", "name","desc","point" )
+    search_fields = ["id", "stop_id","code", "name","desc"]
 
 class StopTimeAdmin(admin.ModelAdmin):
+    """tempi delle fermate"""
     raw_id_fields = ('stop', 'trip')
+    list_display = ("id","trip","arrival_time","departure_time" ,"stop_sequence","stop_headsign")
+    search_fields = ["stop_headsign"]
+
+
 
 
 class TransferAdmin(admin.ModelAdmin):
@@ -82,6 +95,7 @@ class TransferAdmin(admin.ModelAdmin):
 
 class TripAdmin(geo_admin):
     raw_id_fields = ('route', 'service', 'block', 'shape')
+    list_display = ("route","service", "headsign" )
 
 
 class ZoneAdmin(admin.ModelAdmin):

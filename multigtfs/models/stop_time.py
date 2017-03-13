@@ -62,7 +62,7 @@ class StopTime(Base):
     extra_data = JSONField(default={}, blank=True, null=True)
 
     def __str__(self):
-        return "%s-%s-%s" % (self.trip, self.stop.stop_id, self.stop_sequence)
+        return "trip %s- StopId %s - StopSequence %s,  Ore %s" % (self.trip, self.stop.stop_id, self.stop_sequence, self.arrival_time)
 
     class Meta:
         db_table = 'stop_time'

@@ -74,7 +74,7 @@ class Stop(Base):
     extra_data = JSONField(default={}, blank=True, null=True)
 
     def __str__(self):
-        return "%d-%s" % (self.feed_id, self.stop_id)
+        return "%s - %s" % (self.stop_id, self.name)
 
     def getlon(self):
         return self.point[0] if self.point else 0.0
@@ -98,6 +98,9 @@ class Stop(Base):
 
     lat = property(getlat, setlat, doc="WGS 84 latitude of stop or station")
 
+    def getbho(self):
+        return str(self.getlat()+","+self.getlon())
+    
     def __init__(self, *args, **kwargs):
         lat = kwargs.pop('lat', None)
         lon = kwargs.pop('lon', None)
