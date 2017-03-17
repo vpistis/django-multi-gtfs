@@ -32,16 +32,18 @@ class Command(BaseCommand):
         """
         Adds extra command options (executed only by Django >= 1.8).
         """
+        parser.add_argument('gtfsfeed', nargs='+', type=str)
         parser.add_argument("-n", "--name", type=str, dest="name",
                             help="Set the name of the imported feed. "
                                  "Defaults to name derived from agency name and start date")
 
     def handle(self, *args, **options):
-        if len(args) == 0:
+
+        if 'gtfsfeed' not in options:
             raise CommandError('You must pass in the path to the feed.')
-        if len(args) > 1:
+        if len(options['gtfsfeed']) > 1:
             raise CommandError('You can only import one feed at a time.')
-        gtfs_feed = args[0]
+        gtfs_feed = options['gtfsfeed'][0]
         unset_name = 'Imported at %s' % datetime.now()
         name = options.get('name') or unset_name
 
