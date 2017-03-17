@@ -33,7 +33,7 @@ class Command(BaseCommand):
         """
         Adds extra command options (executed only by Django >= 1.8).
         """
-        parser.add_argument("-n", "--name", type="string", dest="name", help="Set the name of the exported feed")
+        parser.add_argument("-n", "--name", type=str, dest="name", help="Set the name of the exported feed")
 
     def handle(self, *args, **options):
         if len(args) == 0:
