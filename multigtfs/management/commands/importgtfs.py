@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import unicode_literals
-from datetime import datetime
-from optparse import make_option
-import logging
 
-from django.db import connection
+import logging
+from datetime import datetime
+
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.db import connection
 
 from multigtfs.models import Agency, Feed, Service
 
@@ -27,12 +27,14 @@ from multigtfs.models import Agency, Feed, Service
 class Command(BaseCommand):
     args = '<gtfsfeed.zip or folder>'
     help = 'Import a GTFS Feed'
-    option_list = BaseCommand.option_list + (
-        make_option(
-            '-n', '--name', type='string', dest='name',
-            help=(
-                'Set the name of the imported feed.  Defaults to name derived'
-                ' from agency name and start date')),)
+
+    def add_arguments(self, parser):
+        """
+        Adds extra command options (executed only by Django >= 1.8).
+        """
+        parser.add_argument("-n", "--name", type="string", dest="name",
+                            help=("Set the name of the imported feed."
+                                  " Defaults to name derived from agency name and start date"))
 
     def handle(self, *args, **options):
         if len(args) == 0:
@@ -58,7 +60,7 @@ class Command(BaseCommand):
             level = logging.DEBUG
             logger_name = ''
             formatter = logging.Formatter(
-                '%(name)s - %(levelname)s - %(message)s')
+                    '%(name)s - %(levelname)s - %(message)s')
         console.setLevel(level)
         console.setFormatter(formatter)
         logger = logging.getLogger(logger_name)

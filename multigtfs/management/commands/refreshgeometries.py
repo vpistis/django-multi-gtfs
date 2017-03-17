@@ -27,14 +27,17 @@ from multigtfs.models import Feed, Route, Shape, Trip
 class Command(BaseCommand):
     args = '--all | <feed ID 1> <feed ID 2> ...'
     help = 'Updates the cached geometry of GTFS feeds'
-    option_list = BaseCommand.option_list + (
-        make_option(
-            '-a', '--all', action='store_true', dest='all', default=False,
-            help='update all feeds'),
-        make_option(
-            '-q', '--quiet', action='store_false', dest='verbose',
-            default=True, help="don't print status messages to stdout"),
-    )
+
+    def add_arguments(self, parser):
+        """
+        Adds extra command options (executed only by Django >= 1.8).
+        """
+        parser.add_argument(
+                "-a", "--all", action="store_true", dest="all", default=False,
+                help="update all feeds")
+        parser.add_argument(
+                "-q", "--quiet", action="store_false", dest="verbose",
+                default=True, help="don't print status messages to stdout")
 
     def handle(self, *args, **options):
         total_start = time.time()

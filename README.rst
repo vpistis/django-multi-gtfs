@@ -18,6 +18,8 @@ It requires a spatial databases compatible with GeoDjango_.  PostgreSQL_ 9.x
 and PostGIS_ 2.x are recommended for development and production, since these
 support all the GeoDjango features.
 
+**This GreenShare fork of multigtfs works with Django >= 1.8.**
+
 Status
 ------
 multigtfs is ready for your GTFS project.
@@ -28,7 +30,7 @@ break relying code.  In the worst case scenario, you may need to export your
 GTFS feeds in the original version, update multigtfs and your code, and
 re-import.
 
-multigtfs works with Django 1.5 through 1.9. In the next version, support
+multigtfs works with Django >= 1.8. In the next version, support
 will be limited to Django's supported releases, so if you are using an old
 version you will want to update to at least 1.8, the long-term support (LTS)
 release.
