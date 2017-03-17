@@ -33,8 +33,7 @@ class Command(BaseCommand):
         Adds extra command options (executed only by Django >= 1.8).
         """
         HELP = "Set the name of the imported feed. Defaults to name derived from agency name and start date"
-        parser.add_argument("-n", "--name", type="string", dest="name",
-                            help=HELP)
+        parser.add_argument("-n", "--name", type="string", dest="name")
 
     def handle(self, *args, **options):
         if len(args) == 0:
