@@ -33,8 +33,8 @@ class Command(BaseCommand):
         Adds extra command options (executed only by Django >= 1.8).
         """
         parser.add_argument("-n", "--name", type="string", dest="name",
-                            help=("Set the name of the imported feed."
-                                  " Defaults to name derived from agency name and start date"))
+                            help="Set the name of the imported feed."
+                                  " Defaults to name derived from agency name and start date")
 
     def handle(self, *args, **options):
         if len(args) == 0:
