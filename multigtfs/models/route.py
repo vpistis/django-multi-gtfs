@@ -84,7 +84,7 @@ class Route(Base):
             self.save()
 
     def __str__(self):
-        return "%d-%s - ( %s ) -%s" % (self.feed.id, self.route_id, self.short_name, self.long_name[0:25])
+        return "%d-%s - ( %s ) - %s" % (self.feed.id, self.route_id, self.short_name, self.long_name[0:100])
 
     class Meta:
         db_table = 'route'
